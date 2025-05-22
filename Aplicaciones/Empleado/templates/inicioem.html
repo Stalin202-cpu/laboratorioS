@@ -1,0 +1,62 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<br><br><br><br><br><br>
+<h1 class="text-center">Listado de Empleado</h1>
+
+<hr>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="table-success text-center">
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>UBICACION</th>
+            <th>TELEFONO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleadoTemporal in empleado %}
+            <tr>
+                <td>{{empleadoTemporal.id}}</td>
+                <td>{{empleadoTemporal.nombre}}</td>
+                <td>{{empleadoTemporal.ubicacion}}</td>
+                <td>{{empleadoTemporal.telefono}}</td>
+                <td>
+                    <a href="editarEmpleado/{{empleadoTemporal.id}}" class="btn btn-outline-warning">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-danger" onclick="confirmarEliminacion('{{empleadoTemporal.id}}')">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                    <script>
+                        function confirmarEliminacion(id) {
+                            Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: '¡Esta acción no se puede deshacer!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `eliminarEmpleado/${id}`;
+                            }
+                            });
+                        }
+                        </script>  
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="text-center ">
+    <a href="nuevoEmpleado" class="btn btn-primary " >
+        Agregar Empleado
+    </a>
+</div>
+<br>
+<br>
+{% endblock %}
