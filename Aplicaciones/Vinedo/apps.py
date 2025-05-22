@@ -3,4 +3,5 @@ from django.apps import AppConfig
 
 class VinedoConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Vinedo'
+    name = 'Aplicaciones.Vinedo'
+
