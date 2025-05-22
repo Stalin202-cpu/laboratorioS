@@ -1,0 +1,39 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<br><br><br><br><br>
+<div class="row" >
+    <div class="col-md-3" ></div>
+    <div class="col-md-6 bg-white" >
+        <h1 >Nuevo Muestreo</h1>
+        <form action="guardarMuestreo" method="post">
+            {% csrf_token %}
+            
+            <label for="fecha">Fecha </label><br>
+            <input class="form-control" type="date" name="fecha" id="fecha" required><br>
+
+            <label for="resultados" >Resultados</label><br>
+            <input class="form-control " type="text" name="resultados" id="resultados" required><br>
+
+            <label for="analista" >Empleado</label><br>
+            <select name="analista" id="analista">
+                <option value="">Seleccione un Empleado</option>
+                {% for e in empleados%}
+                    <option value="{{e.id}}">{{e.nombre}}</option>
+                {% endfor%}
+            </select><br><br><br>
+            <label for="vinedo" >Viñedo</label><br>
+            <select name="vinedo" id="vinedo">
+                <option value="">Seleccione un Viñedo</option>
+                {% for e in vinedos%}
+                    <option value="{{e.id}}">{{e.variedad_uva}}</option>
+                {% endfor%}
+            </select><br><br><br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-danger" href="{% url 'iniciomu' %}">Cancelar</a><br><br><br><br>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
